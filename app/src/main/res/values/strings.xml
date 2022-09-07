@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">WantedNews</string>
+    <string name="title_topnews">Top News</string>
+    <string name="title_categories">Categories</string>
+    <string name="title_saved">Saved</string>
+</resources>
