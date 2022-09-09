@@ -17,6 +17,7 @@ class NewsDetailFragment : Fragment() {
 
     private var _binding: FragmentNewsdetailBinding? = null
     private lateinit var article: Article
+    private var isSaved: Boolean = false
     private val newsDetailViewModel by lazy {
         ViewModelProvider(
             this,
@@ -38,6 +39,7 @@ class NewsDetailFragment : Fragment() {
         article = arguments?.getSerializable("article") as Article
 
         setUi()
+        setEvent()
 
         return root
     }
@@ -49,6 +51,7 @@ class NewsDetailFragment : Fragment() {
         } else {
             binding.imageviewNewsdetailImage.visibility = View.GONE
         }
+
         binding.textviewNewsdetailTitle.text = article.title
         binding.textviewNewsdetailAuthor.text = article.author
         binding.textviewNewsdetailPublishedAt.text =
@@ -56,16 +59,22 @@ class NewsDetailFragment : Fragment() {
         binding.textviewNewsdetailContent.text = article.description + "..."
         binding.textviewNewsdetailUrl.text = "전문 보러가기 : ${article.url}"
 
-        if (arguments?.getString("before") == "notSaved") {
-            binding.imageviewNewsdetailScrap.setOnClickListener {
+        isSaved = newsDetailViewModel.isSaved(article.url)
+        if (isSaved) {
+            binding.imageviewNewsdetailScrap.setImageResource(R.drawable.ic_scrap_yellow)
+        }
+    }
+
+    private fun setEvent() {
+        binding.imageviewNewsdetailScrap.setOnClickListener {
+            if (isSaved) {
+                newsDetailViewModel.delete(article.url)
+                binding.imageviewNewsdetailScrap.setImageResource(R.drawable.ic_scrap_white)
+                isSaved = false
+            } else {
                 newsDetailViewModel.insert(article)
                 binding.imageviewNewsdetailScrap.setImageResource(R.drawable.ic_scrap_yellow)
-            }
-        } else if (arguments?.getString("before") == "saved") {
-            binding.imageviewNewsdetailScrap.setImageResource(R.drawable.ic_scrap_yellow)
-            binding.imageviewNewsdetailScrap.setOnClickListener {
-                newsDetailViewModel.delete(article.id!!)
-                binding.imageviewNewsdetailScrap.setImageResource(R.drawable.ic_scrap_white)
+                isSaved = true
             }
         }
     }

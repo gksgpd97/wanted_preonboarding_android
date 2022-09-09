@@ -5,18 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.wantedpreonboardingandroid.R
 import com.example.wantedpreonboardingandroid.adapter.RecyclerviewAdapter
-import com.example.wantedpreonboardingandroid.databinding.FragmentTopnewsBinding
-import com.example.wantedpreonboardingandroid.ui.MainActivity
-import com.example.wantedpreonboardingandroid.ui.NewsDetailFragment
+import com.example.wantedpreonboardingandroid.databinding.FragmentSavedBinding
 import com.example.wantedpreonboardingandroid.viewmodel.SavedViewModel
 
 class SavedFragment : Fragment() {
 
-    private var _binding: FragmentTopnewsBinding? = null
+    private var _binding: FragmentSavedBinding? = null
     private val savedViewModel by lazy {
         ViewModelProvider(
             this,
@@ -32,20 +33,21 @@ class SavedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentTopnewsBinding.inflate(inflater, container, false)
+        _binding = FragmentSavedBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val adapter = RecyclerviewAdapter({ article ->
-            Log.d("SavedFragment", "click1")
-            (activity as MainActivity).changeToNewsDetailFragment(
-                NewsDetailFragment(),
-                article,
-                "saved"
+            Log.d("SavedFragment", "click")
+            findNavController().navigate(
+                R.id.action_saved_to_newsdetail, bundleOf(
+                    "article" to article,
+                    "before" to "saved"
+                )
             )
         }, requireContext())
-        binding.recyclerviewTopnews.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerviewTopnews.adapter = adapter
-        binding.recyclerviewTopnews.setHasFixedSize(true)
+        binding.recyclerviewSaved.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerviewSaved.adapter = adapter
+        binding.recyclerviewSaved.setHasFixedSize(true)
 
         subscribeUi(adapter)
 
@@ -60,6 +62,15 @@ class SavedFragment : Fragment() {
     private fun subscribeUi(adapter: RecyclerviewAdapter) {
         savedViewModel.getAll().observe(requireActivity()) { articles ->
             adapter.setArticles(articles)
+        }
+        val haveSaved = savedViewModel.haveSaved()
+        Log.d("Test", haveSaved.toString())
+        if (!haveSaved) {
+            binding.recyclerviewSaved.visibility = View.GONE
+            binding.textviewSaved.visibility = View.VISIBLE
+        } else {
+            binding.textviewSaved.visibility = View.GONE
+            binding.recyclerviewSaved.visibility = View.VISIBLE
         }
     }
 }

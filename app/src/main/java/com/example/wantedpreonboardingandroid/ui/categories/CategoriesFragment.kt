@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.wantedpreonboardingandroid.R
 import com.example.wantedpreonboardingandroid.databinding.FragmentCategoriesBinding
-import com.example.wantedpreonboardingandroid.ui.MainActivity
 
 class CategoriesFragment : Fragment() {
 
@@ -28,47 +30,34 @@ class CategoriesFragment : Fragment() {
 
     private fun setEvent() {
         binding.linearlayoutCategoriesBusiness.setOnClickListener {
-            (activity as MainActivity).changeToCategoryNewsFragment(
-                CategoryNewsFragment(),
-                "business"
-            )
+            navigateFragment("business")
         }
         binding.linearlayoutCategoriesEntertainment.setOnClickListener {
-            (activity as MainActivity).changeToCategoryNewsFragment(
-                CategoryNewsFragment(),
-                "entertainment"
-            )
+            navigateFragment("entertainment")
         }
         binding.linearlayoutCategoriesGeneral.setOnClickListener {
-            (activity as MainActivity).changeToCategoryNewsFragment(
-                CategoryNewsFragment(),
-                "general"
-            )
+            navigateFragment("general")
         }
         binding.linearlayoutCategoriesHealth.setOnClickListener {
-            (activity as MainActivity).changeToCategoryNewsFragment(
-                CategoryNewsFragment(),
-                "health"
-            )
+            navigateFragment("health")
         }
         binding.linearlayoutCategoriesScience.setOnClickListener {
-            (activity as MainActivity).changeToCategoryNewsFragment(
-                CategoryNewsFragment(),
-                "science"
-            )
+            navigateFragment("science")
         }
         binding.linearlayoutCategoriesSports.setOnClickListener {
-            (activity as MainActivity).changeToCategoryNewsFragment(
-                CategoryNewsFragment(),
-                "sports"
-            )
+            navigateFragment("sports")
         }
         binding.linearlayoutCategoriesTechnology.setOnClickListener {
-            (activity as MainActivity).changeToCategoryNewsFragment(
-                CategoryNewsFragment(),
-                "technology"
-            )
+            navigateFragment("technology")
         }
+    }
+
+    private fun navigateFragment(category: String) {
+        findNavController().navigate(
+            R.id.action_categories_to_categorynews, bundleOf(
+                "category" to category
+            )
+        )
     }
 
     override fun onDestroyView() {

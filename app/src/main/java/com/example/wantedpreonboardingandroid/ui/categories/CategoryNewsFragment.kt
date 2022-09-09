@@ -5,14 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.wantedpreonboardingandroid.R
 import com.example.wantedpreonboardingandroid.adapter.RecyclerviewAdapter
 import com.example.wantedpreonboardingandroid.databinding.FragmentTopnewsBinding
 import com.example.wantedpreonboardingandroid.ui.MainActivity
-import com.example.wantedpreonboardingandroid.ui.NewsDetailFragment
 import com.example.wantedpreonboardingandroid.viewmodel.CategoriesViewModel
 
 class CategoryNewsFragment : Fragment() {
@@ -40,11 +42,12 @@ class CategoryNewsFragment : Fragment() {
         val root: View = binding.root
 
         val adapter = RecyclerviewAdapter({ article ->
-            Log.d("CategoryNewsFragment", "click1")
-            (activity as MainActivity).changeToNewsDetailFragment(
-                NewsDetailFragment(),
-                article,
-                "notSaved"
+            Log.d("CategoryNewsFragment", "click")
+            findNavController().navigate(
+                R.id.action_categorynews_to_newsdetail, bundleOf(
+                    "article" to article,
+                    "before" to "notSaved"
+                )
             )
         }, requireContext())
         binding.recyclerviewTopnews.apply {

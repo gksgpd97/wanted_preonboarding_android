@@ -24,15 +24,23 @@ class SavedRepository(application: Application) {
         }
     }
 
-    fun delete(id: Int) {
+    fun delete(url: String) {
         try {
             val thread = Thread {
-                articleDao.deleteArticle(id)
+                articleDao.deleteArticle(url)
             }
             thread.start()
         } catch (e: Exception) {
             Log.d("SavedRepository", e.toString())
         }
+    }
+
+    fun isSaved(url: String): Boolean {
+        return articleDao.isSaved(url) == 1
+    }
+
+    fun haveSaved(): Boolean{
+        return articleDao.haveSaved() >= 1
     }
 
     companion object {

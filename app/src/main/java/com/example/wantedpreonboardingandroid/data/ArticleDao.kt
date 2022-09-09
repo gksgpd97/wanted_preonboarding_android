@@ -10,9 +10,15 @@ interface ArticleDao {
     @Insert
     fun insertArticle(article: Article)
 
-    @Query("SELECT * FROM articles ORDER BY id DESC")
+    @Query("SELECT * FROM articles ORDER BY publishedAt DESC")
     fun getAll(): LiveData<MutableList<Article>>
 
-    @Query("DELETE FROM articles WHERE id = :id")
-    fun deleteArticle(id: Int)
+    @Query("DELETE FROM articles WHERE url = :url")
+    fun deleteArticle(url: String)
+
+    @Query("SELECT COUNT(url) FROM articles WHERE url = :url")
+    fun isSaved(url: String): Int
+
+    @Query("SELECT COUNT(*) FROM articles")
+    fun haveSaved(): Int
 }

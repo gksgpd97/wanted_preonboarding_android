@@ -13,6 +13,10 @@ class SavedViewModel(private val repository: SavedRepository) : ViewModel() {
         return repository.getAll() as LiveData<ArrayList<Article>>
     }
 
+    fun haveSaved(): Boolean {
+        return repository.haveSaved()
+    }
+
     class Factory(private val application: Application) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
