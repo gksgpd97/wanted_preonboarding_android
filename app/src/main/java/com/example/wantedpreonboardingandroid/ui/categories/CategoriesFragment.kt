@@ -4,17 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.wantedpreonboardingandroid.databinding.FragmentCategoriesBinding
+import com.example.wantedpreonboardingandroid.ui.MainActivity
 
 class CategoriesFragment : Fragment() {
 
     private var _binding: FragmentCategoriesBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,17 +18,57 @@ class CategoriesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(CategoriesViewModel::class.java)
 
         _binding = FragmentCategoriesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        setEvent()
         return root
+    }
+
+    private fun setEvent() {
+        binding.linearlayoutCategoriesBusiness.setOnClickListener {
+            (activity as MainActivity).changeToCategoryNewsFragment(
+                CategoryNewsFragment(),
+                "business"
+            )
+        }
+        binding.linearlayoutCategoriesEntertainment.setOnClickListener {
+            (activity as MainActivity).changeToCategoryNewsFragment(
+                CategoryNewsFragment(),
+                "entertainment"
+            )
+        }
+        binding.linearlayoutCategoriesGeneral.setOnClickListener {
+            (activity as MainActivity).changeToCategoryNewsFragment(
+                CategoryNewsFragment(),
+                "general"
+            )
+        }
+        binding.linearlayoutCategoriesHealth.setOnClickListener {
+            (activity as MainActivity).changeToCategoryNewsFragment(
+                CategoryNewsFragment(),
+                "health"
+            )
+        }
+        binding.linearlayoutCategoriesScience.setOnClickListener {
+            (activity as MainActivity).changeToCategoryNewsFragment(
+                CategoryNewsFragment(),
+                "science"
+            )
+        }
+        binding.linearlayoutCategoriesSports.setOnClickListener {
+            (activity as MainActivity).changeToCategoryNewsFragment(
+                CategoryNewsFragment(),
+                "sports"
+            )
+        }
+        binding.linearlayoutCategoriesTechnology.setOnClickListener {
+            (activity as MainActivity).changeToCategoryNewsFragment(
+                CategoryNewsFragment(),
+                "technology"
+            )
+        }
     }
 
     override fun onDestroyView() {

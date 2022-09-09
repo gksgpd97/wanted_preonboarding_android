@@ -3,11 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/drawable/categories_linearlayout_border.xml" value="0.111" />
+        <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/drawable/ic_business_black.xml" value="0.111" />
         <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1505" />
+        <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/drawable/ic_entertainment_black.xml" value="0.111" />
         <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1505" />
-        <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/layout/activity_main.xml" value="0.27355072463768115" />
+        <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/drawable/imageview_border.xml" value="0.1765" />
+        <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/drawable/recyclerview_border.xml" value="0.1505" />
+        <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/layout/fragment_categories.xml" value="0.22" />
         <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/layout/fragment_dashboard.xml" value="0.27355072463768115" />
         <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/layout/fragment_home.xml" value="0.27355072463768115" />
+        <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/layout/fragment_newsdetail.xml" value="0.16767983789260385" />
+        <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/layout/fragment_saved.xml" value="0.2604166666666667" />
+        <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/layout/fragment_topnews.xml" value="0.34375" />
+        <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/layout/item_recyclerview.xml" value="0.27355072463768115" />
         <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36302083333333335" />
         <entry key="..\:/WantedPreonboardingAndroid/app/src/main/res/menu/menu_main_bottomnavigation.xml" value="0.36302083333333335" />
       </map>

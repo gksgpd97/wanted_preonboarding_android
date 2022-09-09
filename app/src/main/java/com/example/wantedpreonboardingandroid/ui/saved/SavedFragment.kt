@@ -1,20 +1,29 @@
 package com.example.wantedpreonboardingandroid.ui.saved
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.wantedpreonboardingandroid.databinding.FragmentSavedBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.wantedpreonboardingandroid.adapter.RecyclerviewAdapter
+import com.example.wantedpreonboardingandroid.databinding.FragmentTopnewsBinding
+import com.example.wantedpreonboardingandroid.ui.MainActivity
+import com.example.wantedpreonboardingandroid.ui.NewsDetailFragment
+import com.example.wantedpreonboardingandroid.viewmodel.SavedViewModel
 
 class SavedFragment : Fragment() {
 
-    private var _binding: FragmentSavedBinding? = null
+    private var _binding: FragmentTopnewsBinding? = null
+    private val savedViewModel by lazy {
+        ViewModelProvider(
+            this,
+            SavedViewModel.Factory(requireActivity().application)
+        )[SavedViewModel::class.java]
+    }
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,21 +31,35 @@ class SavedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(SavedViewModel::class.java)
 
-        _binding = FragmentSavedBinding.inflate(inflater, container, false)
+        _binding = FragmentTopnewsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        val adapter = RecyclerviewAdapter({ article ->
+            Log.d("SavedFragment", "click1")
+            (activity as MainActivity).changeToNewsDetailFragment(
+                NewsDetailFragment(),
+                article,
+                "saved"
+            )
+        }, requireContext())
+        binding.recyclerviewTopnews.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerviewTopnews.adapter = adapter
+        binding.recyclerviewTopnews.setHasFixedSize(true)
+
+        subscribeUi(adapter)
+
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun subscribeUi(adapter: RecyclerviewAdapter) {
+        savedViewModel.getAll().observe(requireActivity()) { articles ->
+            adapter.setArticles(articles)
+        }
     }
 }
