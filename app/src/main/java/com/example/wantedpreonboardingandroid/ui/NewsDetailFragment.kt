@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -67,14 +68,16 @@ class NewsDetailFragment : Fragment() {
 
     private fun setEvent() {
         binding.imageviewNewsdetailScrap.setOnClickListener {
-            if (isSaved) {
+            isSaved = if (isSaved) {
                 newsDetailViewModel.delete(article.url)
                 binding.imageviewNewsdetailScrap.setImageResource(R.drawable.ic_scrap_white)
-                isSaved = false
+                Toast.makeText(requireContext(), "스크랩이 취소되었습니다.", Toast.LENGTH_SHORT).show()
+                false
             } else {
                 newsDetailViewModel.insert(article)
                 binding.imageviewNewsdetailScrap.setImageResource(R.drawable.ic_scrap_yellow)
-                isSaved = true
+                Toast.makeText(requireContext(), "스크랩 되었습니다.", Toast.LENGTH_SHORT).show()
+                true
             }
         }
     }

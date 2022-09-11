@@ -6,7 +6,7 @@ import com.example.wantedpreonboardingandroid.api.NewsService
 
 class NewsRepository(application: Application) {
     suspend fun selectArticles(): DefaultResponse {
-        val response = NewsService.selectArticles(BuildConfig.NEWS_API_KEY, "kr")
+        val response = NewsService.selectArticles(BuildConfig.NEWS_API_KEY, "kr", 100)
         return if (response.isSuccessful) response.body() as DefaultResponse else DefaultResponse(
             "fail",
             "",
@@ -17,7 +17,7 @@ class NewsRepository(application: Application) {
 
     suspend fun selectArticlesWithCategory(category: String): DefaultResponse {
         val response =
-            NewsService.selectArticlesWithCategory(BuildConfig.NEWS_API_KEY, "kr", category)
+            NewsService.selectArticlesWithCategory(BuildConfig.NEWS_API_KEY, "kr", category, 100)
         return if (response.isSuccessful) response.body() as DefaultResponse else DefaultResponse(
             "fail",
             "",

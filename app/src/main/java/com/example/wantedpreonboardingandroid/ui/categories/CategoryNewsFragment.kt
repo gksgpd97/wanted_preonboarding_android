@@ -42,7 +42,6 @@ class CategoryNewsFragment : Fragment() {
         val root: View = binding.root
 
         val adapter = RecyclerviewAdapter({ article ->
-            Log.d("CategoryNewsFragment", "click")
             findNavController().navigate(
                 R.id.action_categorynews_to_newsdetail, bundleOf(
                     "article" to article,

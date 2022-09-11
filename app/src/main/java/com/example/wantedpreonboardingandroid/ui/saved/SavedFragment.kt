@@ -1,7 +1,6 @@
 package com.example.wantedpreonboardingandroid.ui.saved
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,6 @@ class SavedFragment : Fragment() {
         val root: View = binding.root
 
         val adapter = RecyclerviewAdapter({ article ->
-            Log.d("SavedFragment", "click")
             findNavController().navigate(
                 R.id.action_saved_to_newsdetail, bundleOf(
                     "article" to article,
@@ -64,7 +62,6 @@ class SavedFragment : Fragment() {
             adapter.setArticles(articles)
         }
         val haveSaved = savedViewModel.haveSaved()
-        Log.d("Test", haveSaved.toString())
         if (!haveSaved) {
             binding.recyclerviewSaved.visibility = View.GONE
             binding.textviewSaved.visibility = View.VISIBLE

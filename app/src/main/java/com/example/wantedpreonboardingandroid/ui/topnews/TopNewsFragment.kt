@@ -37,7 +37,6 @@ class TopNewsFragment : Fragment() {
         val root: View = binding.root
 
         val adapter = RecyclerviewAdapter({ article ->
-            Log.d("TopNewsFragment", "click")
             findNavController().navigate(
                 R.id.action_topnews_to_newsdetail, bundleOf(
                     "article" to article,
