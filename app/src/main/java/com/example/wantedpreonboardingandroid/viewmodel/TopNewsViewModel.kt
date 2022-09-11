@@ -7,9 +7,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.wantedpreonboardingandroid.data.DefaultResponse
 import com.example.wantedpreonboardingandroid.data.NewsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TopNewsViewModel(private val repository: NewsRepository) : ViewModel() {
+@HiltViewModel
+class TopNewsViewModel @Inject constructor(private val repository: NewsRepository) : ViewModel() {
     private val _response = MutableLiveData<DefaultResponse>()
     val response: MutableLiveData<DefaultResponse>
         get() = _response
@@ -20,10 +23,5 @@ class TopNewsViewModel(private val repository: NewsRepository) : ViewModel() {
         }
     }
 
-    class Factory(private val application: Application) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return TopNewsViewModel(NewsRepository.getInstance(application)!!) as T
-        }
-    }
+
 }

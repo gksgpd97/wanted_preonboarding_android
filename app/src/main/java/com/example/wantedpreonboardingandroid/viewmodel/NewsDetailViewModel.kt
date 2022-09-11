@@ -5,8 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.wantedpreonboardingandroid.data.Article
 import com.example.wantedpreonboardingandroid.data.SavedRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class NewsDetailViewModel(private val repository: SavedRepository) : ViewModel() {
+@HiltViewModel
+class NewsDetailViewModel @Inject constructor(private val repository: SavedRepository) : ViewModel() {
 
     fun insert(article: Article) {
         repository.insert(article)
@@ -20,10 +23,4 @@ class NewsDetailViewModel(private val repository: SavedRepository) : ViewModel()
         return repository.isSaved(url)
     }
 
-    class Factory(private val application: Application) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return NewsDetailViewModel(SavedRepository.getInstance(application)!!) as T
-        }
-    }
 }

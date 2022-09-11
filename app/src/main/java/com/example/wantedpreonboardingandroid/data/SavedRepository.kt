@@ -3,8 +3,9 @@ package com.example.wantedpreonboardingandroid.data
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
+import javax.inject.Inject
 
-class SavedRepository(application: Application) {
+class SavedRepository @Inject constructor(application: Application) {
     private val appDatabase = AppDatabase.getInstance(application)!!
     private val articleDao = appDatabase.articleDao()
     private val articles = articleDao.getAll()

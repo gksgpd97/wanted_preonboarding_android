@@ -12,7 +12,9 @@ import com.example.wantedpreonboardingandroid.data.Article
 import com.example.wantedpreonboardingandroid.databinding.FragmentNewsdetailBinding
 import com.example.wantedpreonboardingandroid.utilities.DateConvertor
 import com.example.wantedpreonboardingandroid.viewmodel.NewsDetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewsDetailFragment : Fragment() {
 
     private var _binding: FragmentNewsdetailBinding? = null
@@ -20,8 +22,7 @@ class NewsDetailFragment : Fragment() {
     private var isSaved: Boolean = false
     private val newsDetailViewModel by lazy {
         ViewModelProvider(
-            this,
-            NewsDetailViewModel.Factory(requireActivity().application)
+            this
         )[NewsDetailViewModel::class.java]
     }
 

@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.wantedpreonboardingandroid.data.Article
 import com.example.wantedpreonboardingandroid.data.SavedRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SavedViewModel(private val repository: SavedRepository) : ViewModel() {
+@HiltViewModel
+class SavedViewModel @Inject constructor(private val repository: SavedRepository) : ViewModel() {
 
     fun getAll(): LiveData<ArrayList<Article>> {
         return repository.getAll() as LiveData<ArrayList<Article>>
@@ -17,10 +20,4 @@ class SavedViewModel(private val repository: SavedRepository) : ViewModel() {
         return repository.haveSaved()
     }
 
-    class Factory(private val application: Application) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return SavedViewModel(SavedRepository.getInstance(application)!!) as T
-        }
-    }
 }

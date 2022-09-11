@@ -14,14 +14,15 @@ import com.example.wantedpreonboardingandroid.R
 import com.example.wantedpreonboardingandroid.adapter.RecyclerviewAdapter
 import com.example.wantedpreonboardingandroid.databinding.FragmentSavedBinding
 import com.example.wantedpreonboardingandroid.viewmodel.SavedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SavedFragment : Fragment() {
 
     private var _binding: FragmentSavedBinding? = null
     private val savedViewModel by lazy {
         ViewModelProvider(
-            this,
-            SavedViewModel.Factory(requireActivity().application)
+            this
         )[SavedViewModel::class.java]
     }
 

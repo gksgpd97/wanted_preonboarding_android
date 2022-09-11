@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,17 +15,15 @@ import com.example.wantedpreonboardingandroid.adapter.RecyclerviewAdapter
 import com.example.wantedpreonboardingandroid.databinding.FragmentTopnewsBinding
 import com.example.wantedpreonboardingandroid.ui.MainActivity
 import com.example.wantedpreonboardingandroid.viewmodel.CategoriesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CategoryNewsFragment : Fragment() {
 
     private var _binding: FragmentTopnewsBinding? = null
     private val categoriesViewModel by lazy {
         ViewModelProvider(
-            this,
-            CategoriesViewModel.Factory(
-                requireActivity().application,
-                arguments?.getString("category").toString()
-            )
+            this
         )[CategoriesViewModel::class.java]
     }
 
@@ -63,7 +60,6 @@ class CategoryNewsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val a: FragmentActivity? = activity
         var category = arguments?.getString("category").toString()
         category = when (category) {
             "business" -> " - 금융"
